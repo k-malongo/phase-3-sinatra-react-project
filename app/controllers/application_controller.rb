@@ -10,6 +10,16 @@ class ApplicationController < Sinatra::Base
     products= Product.all
     products.to_json(include: :reviews)
   end
+
+  post '/products' do 
+    product = Product.create(
+      user_name: params[:user_name],
+      comment: params[:comment],
+      product_id: params[:product_id]
+    )
+    review.to_json
+  end
+
   get "/reviews" do
     review= Review.all
     review.to_json
@@ -35,12 +45,14 @@ class ApplicationController < Sinatra::Base
     review.to_json
   end 
   # patch
-  patch '/messages/:id' do
+  patch '/reviews/:id' do
     review = Review.find(params[:id])
     review.update(
-      body: params[:body]
+      user_name: params[:user_name],
+      comment: params[:comment],
+      product_id: params[:product_id]
     )
     review.to_json
   end 
-
+ 
 end
