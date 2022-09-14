@@ -13,11 +13,16 @@ class ApplicationController < Sinatra::Base
 
   post '/products' do 
     product = Product.create(
-      user_name: params[:user_name],
-      comment: params[:comment],
-      product_id: params[:product_id]
+      title: params[:title],
+      price: params[:price],
+      description: params[:description],
+      category_id: 1,
+      image: params[:image],
+      rating: params[:rating]
+
+
     )
-    review.to_json
+    product.to_json
   end
 
   get "/reviews" do
